@@ -17,7 +17,8 @@ class Application
     }
     public function run(): void
     {
-        echo 'working';
+        $this->route->setPrefix($this->settings->getRootPath());
+        $this->route->start();
     }
 
 }
