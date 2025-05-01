@@ -1,6 +1,6 @@
 <?php
 return [
-  'root' => '',
+  'root' => 'pop-it-mvc',
   'classes' => [
       'app',
       'core',
