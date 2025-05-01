@@ -20,6 +20,6 @@ class Settings
     }
     public function getViewsPath(): string
     {
-        return '/' . $this->path['views'];
+        return '/' . $this->path['views'] ?? '';
     }
 }
