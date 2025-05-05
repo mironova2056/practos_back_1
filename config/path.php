@@ -1,10 +1,6 @@
 <?php
 return [
-  'root' => 'pop-it-mvc',
-  'classes' => [
-      'app',
-      'core',
-  ],
-  'routes' => 'routes',
-  'views' => 'views',
+    'root' => 'practos_back_1',
+    'routes' => 'routes',
+    'views' => 'views'
 ];

@@ -1,2 +1,22 @@
 {
+    "name": "mironova2056/practos_back_1",
+    "description": "just practos",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "mako",
+            "email": "maria.mironova562006@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.4 | ^8.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Src\\": "core/Src/",
+            "": "app/"
+        }
+    }
 }
