@@ -14,7 +14,9 @@
         "php": "^7.4 | ^8.1.9",
         "illuminate/database": "^13.0@dev",
         "illuminate/events": "^13.0@dev",
-        "paragonie/random_compat": "dev-master"
+        "paragonie/random_compat": "dev-master",
+        "slim/psr7": "1.6",
+        "symfony/dependency-injection": "6.4"
     },
     "autoload": {
         "psr-4": {

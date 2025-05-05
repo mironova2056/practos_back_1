@@ -3,7 +3,7 @@
         'name' => 'mironova2056/practos_back_1',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '9081422eff9ae4d9a57beeeb3fb7ef7e7fa68f15',
+        'reference' => '4a3432e416d9fce86cd3afd5bbf52a8ce422ff07',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -35,6 +35,17 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../doctrine/inflector',
             'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'fig/http-message-util' => array(
+            'pretty_version' => 'dev-master',
+            'version' => 'dev-master',
+            'reference' => '9d94dc0154230ac39e5bf89398b324a86f63f765',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../fig/http-message-util',
+            'aliases' => array(
+                0 => '1.1.x-dev',
+            ),
             'dev_requirement' => false,
         ),
         'illuminate/bus' => array(
@@ -159,7 +170,7 @@
         'mironova2056/practos_back_1' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '9081422eff9ae4d9a57beeeb3fb7ef7e7fa68f15',
+            'reference' => '4a3432e416d9fce86cd3afd5bbf52a8ce422ff07',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -219,6 +230,36 @@
                 0 => '1.1|2.0',
             ),
         ),
+        'psr/http-factory' => array(
+            'pretty_version' => '1.1.0',
+            'version' => '1.1.0.0',
+            'reference' => '2b4765fddfe3b508ac62f829e852b1501d3f6e8a',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/http-factory',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'psr/http-factory-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.0',
+            ),
+        ),
+        'psr/http-message' => array(
+            'pretty_version' => '1.1',
+            'version' => '1.1.0.0',
+            'reference' => 'cb6ce4845ce34a8ad9e68117c10ee90a29919eba',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../psr/http-message',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'psr/http-message-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.0',
+            ),
+        ),
         'psr/simple-cache' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
@@ -228,6 +269,24 @@
             'aliases' => array(
                 0 => '3.0.x-dev',
             ),
+            'dev_requirement' => false,
+        ),
+        'ralouphie/getallheaders' => array(
+            'pretty_version' => '3.0.3',
+            'version' => '3.0.3.0',
+            'reference' => '120b605dfeb996808c31b6477290a714d356e822',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../ralouphie/getallheaders',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'slim/psr7' => array(
+            'pretty_version' => '1.6',
+            'version' => '1.6.0.0',
+            'reference' => '3471c22c1a0d26c51c78f6aeb06489d38cf46a4d',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../slim/psr7',
+            'aliases' => array(),
             'dev_requirement' => false,
         ),
         'spatie/once' => array(
@@ -242,6 +301,15 @@
             'reference' => 'b81435fbd6648ea425d1ee96a2d8e68f4ceacd24',
             'type' => 'library',
             'install_path' => __DIR__ . '/../symfony/clock',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/dependency-injection' => array(
+            'pretty_version' => 'v6.4.0',
+            'version' => '6.4.0.0',
+            'reference' => '5dc8ad5f2bbba7046f5947682bf7d868ce80d4e8',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/dependency-injection',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -265,6 +333,15 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
+        'symfony/polyfill-php80' => array(
+            'pretty_version' => '1.x-dev',
+            'version' => '1.9999999.9999999.9999999-dev',
+            'reference' => '0cc9dd0f17f61d8131e7df6b84bd344899fe2608',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/polyfill-php80',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'symfony/polyfill-php83' => array(
             'pretty_version' => '1.x-dev',
             'version' => '1.9999999.9999999.9999999-dev',
@@ -273,6 +350,23 @@
             'install_path' => __DIR__ . '/../symfony/polyfill-php83',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'symfony/service-contracts' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'f021b05a130d35510bd6b25fe9053c2a8a15d5d4',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/service-contracts',
+            'aliases' => array(
+                0 => '3.6.x-dev',
+            ),
+            'dev_requirement' => false,
+        ),
+        'symfony/service-implementation' => array(
+            'dev_requirement' => false,
+            'provided' => array(
+                0 => '1.1|2.0|3.0',
+            ),
         ),
         'symfony/translation' => array(
             'pretty_version' => '7.3.x-dev',
@@ -299,6 +393,15 @@
             'provided' => array(
                 0 => '2.3|3.0',
             ),
+        ),
+        'symfony/var-exporter' => array(
+            'pretty_version' => '7.3.x-dev',
+            'version' => '7.3.9999999.9999999-dev',
+            'reference' => '6d25a2377310c85f0400797e4f07c303df00bd74',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/var-exporter',
+            'aliases' => array(),
+            'dev_requirement' => false,
         ),
         'voku/portable-ascii' => array(
             'pretty_version' => '2.0.3',
