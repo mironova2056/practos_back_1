@@ -10,7 +10,6 @@ class User extends Model implements IdentityInterface
 
     public $timestamps = false;
     protected $fillable = [
-        'name',
         'login',
         'password'
     ];
@@ -22,9 +21,9 @@ class User extends Model implements IdentityInterface
             $user->save();
         });
     }
-    public function findIdentity(int $id)
+    public function findIdentity(int $userId)
     {
-        return self::where('id', $id)->first();
+        return self::where('id_user', $userId)->first();
     }
 
     public function getId(): int
