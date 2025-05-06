@@ -136,4 +136,12 @@ class Site
             'errors' => $errors
         ];
     }
+    public function staffDashboard(Request $request): string
+    {
+        if (!Auth::check() || Auth::user()->id_role != 2) {
+            app()->route->redirect('/login');
+        }
+        return new View('site.staff_page', [
+        ]);
+    }
 }
