@@ -1,7 +1,9 @@
 <?php
 
 namespace Src\Auth;
+
 use Src\Session;
+
 class Auth
 {
     private static IdentityInterface $user;
@@ -17,8 +19,9 @@ class Auth
     public static function login(IdentityInterface $user): void
     {
         self::$user = $user;
-        Session::set('id', self::$user->getId());
+        Session::set('user_id', self::$user->getId()); 
     }
+
     public static function attempt(array $credentials): bool
     {
         if ($user = self::$user->attemptIdentity($credentials)) {
@@ -27,22 +30,26 @@ class Auth
         }
         return false;
     }
+
     public static function user()
     {
-        $id = Session::get('id') ?? 0;
-        return self::$user->findIdentity($id);
+        $userId = Session::get('user_id') ?? 0;
+        return self::$user->findIdentity($userId);
     }
+
     public static function check(): bool
     {
-        if (self::user()) {
-            return true;
-        }
-        return false;
+        return (bool) self::user();
     }
+
     public static function logout(): bool
     {
-        Session::clear('id');
+        Session::clear('user_id');
         return true;
     }
 
+    public static function id()
+    {
+        return Session::get('user_id');
+    }
 }

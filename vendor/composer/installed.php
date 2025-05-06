@@ -3,7 +3,7 @@
         'name' => 'mironova2056/practos_back_1',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '290f94671dadeb30da0975984beb1af2d0880373',
+        'reference' => 'fdca95795e6a3001665a70ee229eca8edd144aa7',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -130,7 +130,7 @@
         'mironova2056/practos_back_1' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '290f94671dadeb30da0975984beb1af2d0880373',
+            'reference' => 'fdca95795e6a3001665a70ee229eca8edd144aa7',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
