@@ -24,7 +24,7 @@ class Authenticate
             if (Auth::user()->id_role === 1) {
                 app()->route->redirect('/admin');
             } else {
-                app()->route->redirect('/hello');
+                app()->route->redirect('/staff');
             }
         }
 

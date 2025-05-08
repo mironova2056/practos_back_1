@@ -5,7 +5,7 @@ use Src\View;
 use Src\Auth\Auth;
 class Staff
 {
-    public function dashboard(): string
+    public function staffDashboard(): string
     {
         if (!Auth::check() || Auth::user()->id_role != 2) {
             app()->route->redirect('/login');
