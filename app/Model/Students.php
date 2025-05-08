@@ -2,6 +2,8 @@
 
 namespace Model;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\belongsTo;
+use Illuminate\Database\Eloquent\Relations\hasMany;
 class Students extends Model
 {
     protected $table = 'students';
@@ -15,4 +17,15 @@ class Students extends Model
         'id_gender',
         'id_group'
     ];
+    public function gender()
+    {
+        return $this->belongsTo(Genders::class, 'id_gender', 'id_gender');
+    }
+    public function grades(){
+        return $this->hasMany(Grades::class, 'id_student', 'id_student');
+    }
+    public function student_groups(){
+        return $this->belongsTo(Student_groups::class, 'id_group', 'id_group');
+    }
+
 }
