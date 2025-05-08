@@ -41,7 +41,7 @@ class User extends Model implements IdentityInterface
             'password' => md5($credentials['password'])
         ])->first();
     }
-    public function roles(): BelongsTo
+    public function roles()
     {
         return $this->belongsTo(Role::class, 'id_role', 'id_role');
     }

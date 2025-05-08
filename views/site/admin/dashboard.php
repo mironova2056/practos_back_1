@@ -168,7 +168,7 @@
                 <label>Роль</label>
                 <select name="id_role" required>
                     <?php foreach ($roles as $role): ?>
-                        <option value="<?= $role->id ?>"><?= $role->name ?></option>
+                        <option value="<?= $role->id_role ?>"><?= $role->name ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -186,7 +186,6 @@
                 <th>ID</th>
                 <th>Логин</th>
                 <th>Роль</th>
-                <th>Действия</th>
             </tr>
             </thead>
             <tbody>
@@ -194,13 +193,10 @@
                 <tr>
                     <td><?= $user->id_user ?></td>
                     <td><?= $user->login ?></td>
-                    <td><?= $user->id_role?></td>
-                    <td class="action-buttons">
-                        <a href="/admin/edit/<?= $user->id_user ?>" class="btn btn-sm">Редактировать</a>
-                        <a href="/admin/delete/<?= $user->id_user ?>" class="btn btn-sm btn-danger">Удалить</a>
-                    </td>
+                    <td><?= $user->id_role ?></td>
                 </tr>
             <?php endforeach; ?>
+
             </tbody>
         </table>
     </div>
