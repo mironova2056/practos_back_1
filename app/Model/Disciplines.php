@@ -7,12 +7,14 @@ class Disciplines extends Model
 {
     protected $table = 'disciplines';
     protected $primaryKey = 'id_discipline';
-    protected $fillable = ['id_discipline', 'name'];
-    public function disciplines()
+    protected $fillable = ['name'];
+    public $timestamps = false;
+    public function grades(): hasMany
     {
-        return $this->hasMany(Disciplines::class, 'id_discipline');
+        return $this->hasMany(Grades::class, 'id_discipline');
     }
-    public function group_disciplines(){
-        return $this->hasMany(Group_disciplines::class, 'id_discipline');
+    public function group_disciplines(): hasMany
+    {
+        return $this->hasMany(GroupDisciplines::class, 'id_discipline');
     }
 }

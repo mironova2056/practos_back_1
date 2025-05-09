@@ -1,0 +1,59 @@
+<?php
+
+namespace Controller;
+use Src\Request;
+use Src\View;
+use Model\Students;
+use Model\StudentGroups;
+use Model\Genders;
+use Src\Auth\Auth;
+class StudentController
+{
+    public function index(Request $request): View
+    {
+        if (!Auth::check() || Auth::user()->id_role != 2) {
+            app()->route->redirect('/login');
+        }
+
+        $students = Students::with(['student_groups', 'gender'])->get();
+        return new View('staff.students.index', [
+            'students' => $students,
+            'groups' => StudentGroups::all(),
+            'genders' => Genders::all()
+        ]);
+    }
+
+    public function create(Request $request): string
+    {
+        if ($request->method === 'POST') {
+            $validated = $this->validate($request->all());
+
+            if ($validated['success']) {
+                Students::create($request->all());
+                app()->route->redirect('/staff/students?success=Студент добавлен');
+            }
+
+            return new View('site.staff_page', [
+                'errors' => $validated['errors'],
+                'groups' => StudentGroups::all(),
+                'genders' => Genders::all()
+            ]);
+        }
+
+        return new View('site.staff_page', [
+            'groups' => StudentGroups::all(),
+            'genders' => Genders::all()
+        ]);
+    }
+
+    private function validate(array $data): array
+    {
+        $errors = [];
+        if (empty($data['name'])) $errors[] = 'Имя обязательно';
+        if (empty($data['surname'])) $errors[] = 'Фамилия обязательна';
+        if (empty($data['date_birth'])) $errors[] = 'Дата рождения обязательна';
+        if (empty($data['id_gender'])) $errors[] = 'Пол обязателен';
+        if (empty($data['id_group'])) $errors[] = 'Группа обязательна';
+        return ['success' => empty($errors), 'errors' => $errors];
+    }
+}

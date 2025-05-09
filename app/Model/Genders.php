@@ -7,10 +7,10 @@ class Genders extends Model
 {
     protected $table = 'genders';
     protected $primaryKey = 'id_gender';
-    protected $fillable = ['name', 'id_gender'];
-    public  function students ()
+    protected $fillable = ['name'];
+    public  function students (): hasMany
     {
-        return $this->hasMany('Model\Students', 'id_gender');
+        return $this->hasMany(Students::class, 'id_gender');
     }
 
 }

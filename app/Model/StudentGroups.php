@@ -3,16 +3,18 @@
 namespace Model;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-class Student_groups extends Model
+class StudentGroups extends Model
 {
     protected $table = 'student_groups';
     protected $primaryKey = 'id_group';
-    protected $fillable = ['id_group', 'name'];
-    public function students()
+    protected $fillable = ['name'];
+    public $timestamps = false;
+    public function students(): HasMany
     {
         return $this->hasMany(Students::class, 'id_group', 'id_group');
     }
-    public function group_disciplines(){
-        return $this->hasMany(Group_disciplines::class, 'id_group', 'id_group');
+    public function group_disciplines(): HasMany
+    {
+        return $this->hasMany(GroupDisciplines::class, 'id_group', 'id_group');
     }
 }

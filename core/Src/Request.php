@@ -2,8 +2,6 @@
 
 namespace Src;
 
-use Error;
-
 class Request
 {
     protected array $body;
@@ -22,14 +20,19 @@ class Request
         return $this->body + $this->files();
     }
 
-    public function set($field, $value):void
+    public function set(string $field, $value): void
     {
         $this->body[$field] = $value;
     }
 
-    public function get($field)
+    public function get(string $key, $default = null)
     {
-        return $this->body[$field];
+        return $this->body[$key] ?? $default;
+    }
+
+    public function has(string $key): bool
+    {
+        return array_key_exists($key, $this->body);
     }
 
     public function files(): array
@@ -37,11 +40,12 @@ class Request
         return $_FILES;
     }
 
-    public function __get($key)
+    public function __get(string $key)
     {
-        if (array_key_exists($key, $this->body)) {
-            return $this->body[$key];
+        if ($this->has($key)) {
+            return $this->get($key);
         }
-        throw new Error('Accessing a non-existent property');
+
+        throw new \InvalidArgumentException("Request parameter '{$key}' not found");
     }
 }
