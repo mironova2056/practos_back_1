@@ -73,20 +73,6 @@
         background: #2980b9;
     }
 
-    .btn-sm {
-        padding: 6px 12px;
-        font-size: 14px;
-    }
-
-    .btn-danger {
-        background: #e74c3c;
-        color: white;
-    }
-
-    .btn-danger:hover {
-        background: #c0392b;
-    }
-
     .alert {
         padding: 15px;
         border-radius: 6px;
@@ -123,10 +109,63 @@
     .user-table tr:hover {
         background: #f8f9fa;
     }
+    .search-container {
+        margin-bottom: 30px;
+    }
 
-    .action-buttons {
+    .search-form {
         display: flex;
         gap: 10px;
+        align-items: flex-end;
+    }
+
+    .search-input-group {
+        flex: 1;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #dfe6e9;
+        border-radius: 6px;
+        font-size: 16px;
+        transition: border 0.3s;
+    }
+
+    .search-input:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+    }
+
+    .search-btn {
+        padding: 12px 24px;
+        background: #3498db;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.3s;
+    }
+
+    .search-btn:hover {
+        background: #2980b9;
+    }
+
+    .reset-btn {
+        padding: 12px 24px;
+        background: #95a5a6;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background 0.3s;
+    }
+
+    .reset-btn:hover {
+        background: #7f8c8d;
     }
 </style>
 
@@ -140,6 +179,7 @@
     <?php if ($error): ?>
         <div class="alert alert-danger"><?= $error ?></div>
     <?php endif; ?>
+
 
     <div class="card">
         <h2>Добавить нового пользователя</h2>
@@ -176,7 +216,24 @@
             <button type="submit" class="btn btn-primary">Добавить пользователя</button>
         </form>
     </div>
-
+    <div class="card search-container">
+        <form method="get" class="search-form">
+            <input type="hidden" name="getUsersWithSearch" value="1">
+            <div class="search-input-group">
+                <label for="search" class="form-group label">Поиск пользователей</label>
+                <input type="text"
+                       id="search"
+                       name="search"
+                       class="search-input"
+                       placeholder="Введите логин пользователя..."
+                       value="<?= htmlspecialchars($searchQuery ?? '') ?>">
+            </div>
+            <button type="submit" class="search-btn">Найти</button>
+            <?php if (!empty($searchQuery)): ?>
+                <a href="/practos_back_1/admin" class="reset-btn">Сбросить</a>
+            <?php endif; ?>
+        </form>
+    </div>
     <div class="card">
         <h2>Список пользователей</h2>
 

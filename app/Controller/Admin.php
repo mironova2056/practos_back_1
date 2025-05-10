@@ -17,12 +17,13 @@ class Admin
         $this->checkAdminAccess();
 
         // Обработка добавления пользователя
-        if ($request->method === 'POST') {
+        if ($request->method === 'POST' && !$request->has('search')) {
             $this->handleUserCreation($request);
         }
 
         // Получаем данные для отображения
-        $users = User::all(); // Загружаем связанные роли
+        $searchQuery = $request->get('search');
+        $users = $this->getUsersWithSearch($searchQuery);
         $roles = Role::all();
 
         return new View('site.admin.dashboard', [
@@ -33,7 +34,16 @@ class Admin
             'errors' => Session::get('errors') ?? []
         ]);
     }
+    private function getUsersWithSearch(?string $searchQuery = null)
+    {
+        $query = User::query()->with('roles');
 
+        if ($searchQuery) {
+            $query->where('login', 'LIKE', "%{$searchQuery}%");
+        }
+
+        return $query->get();
+    }
     private function handleUserCreation(Request $request): void
     {
         $data = $request->all();
@@ -97,7 +107,7 @@ class Admin
     private function checkAdminAccess(): void
     {
         if (!Auth::check() || Auth::user()->id_role !== 1) {
-            app()->route->redirect('/hello');
+            app()->route->redirect('/login');
             return;
         }
     }
