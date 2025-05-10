@@ -284,8 +284,8 @@
         <div class="section-header">
             <h2 class="section-title">Дисциплины</h2>
             <div class="action-btns">
-                <a href="/disciplines/create" class="btn btn-primary">Добавить дисциплину</a>
-                <a href="/disciplines/attach" class="btn btn-primary">Прикрепить к группе</a>
+                <a href="/practos_back_1/disciplines/create" class="btn btn-primary">Добавить дисциплину</a>
+                <a href="/practos_back_1/disciplines/attach" class="btn btn-primary">Прикрепить к группе</a>
             </div>
         </div>
 
@@ -317,6 +317,7 @@
             <?php endif; ?>
             </tbody>
         </table>
+
     </div>
 
     <!-- Секция успеваемости -->
