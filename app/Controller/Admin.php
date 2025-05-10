@@ -8,54 +8,64 @@ use Src\Auth\Auth;
 use Src\Session;
 use Model\User;
 use Model\Role;
-
+use Controller\UserSearch;
+use Validation\UserValidator;
 class Admin
 {
     public function adminDashboard(Request $request): string
     {
-        // Проверка прав администратора
         $this->checkAdminAccess();
 
-        // Обработка добавления пользователя
+        $users = [];
+        $errors = [];
+        $oldInput = [];
+        $searchQuery = null;
+
         if ($request->method === 'POST' && !$request->has('search')) {
-            $this->handleUserCreation($request);
+            $validator = new UserValidator();
+
+            if ($validator->validate($request->all())) {
+                if ($this->createUser($request->all())) {
+                    Session::set('success', 'Пользователь успешно добавлен');
+                    app()->route->redirect('/admin');
+                    return '';
+                }
+            } else {
+                $errors = $validator->getErrors();
+                $oldInput = $request->all();
+            }
         }
 
-        // Получаем данные для отображения
-        $searchQuery = $request->get('search');
-        $users = $this->getUsersWithSearch($searchQuery);
+        $searchQuery = $request->get('search') ? trim($request->get('search')) : null;
+        $users = UserSearch::search($searchQuery);
         $roles = Role::all();
 
-        return new View('site.admin.dashboard', [
+        $view = new View('site.admin.dashboard', [
             'users' => $users,
             'roles' => $roles,
+            'searchQuery' => $searchQuery,
             'success' => Session::get('success'),
             'error' => Session::get('error'),
-            'errors' => Session::get('errors') ?? []
+            'errors' => $errors,
+            'old' => $oldInput
         ]);
-    }
-    private function getUsersWithSearch(?string $searchQuery = null)
-    {
-        $query = User::query()->with('roles');
 
-        if ($searchQuery) {
-            $query->where('login', 'LIKE', "%{$searchQuery}%");
-        }
-
-        return $query->get();
+        return (string)$view;
     }
+
     private function handleUserCreation(Request $request): void
     {
-        $data = $request->all();
-        $validator = $this->validateUserData($data);
+       $validator = new UserValidator();
 
-        if ($validator['success']) {
-            if ($this->createUser($data)) {
+        if ($validator->validate($request->all())) {
+            if ($this->createUser($request->all())) {
                 Session::set('success', 'Пользователь успешно добавлен');
                 app()->route->redirect('/admin');
             }
         } else {
-            Session::set('errors', $validator['errors']);
+            Session::set('form_data', $request->all());
+            Session::set('errors', $validator->getErrors());
+            app()->route->redirect('/admin');
         }
     }
 
@@ -76,40 +86,10 @@ class Admin
         }
     }
 
-    private function validateUserData(array $data): array
-    {
-        $errors = [];
-
-        if (empty($data['login'])) {
-            $errors['login'] = 'Логин обязателен для заполнения';
-        } elseif (User::where('login', $data['login'])->exists()) {
-            $errors['login'] = 'Этот логин уже занят';
-        }
-
-        if (empty($data['password'])) {
-            $errors['password'] = 'Пароль обязателен для заполнения';
-        } elseif (strlen($data['password']) < 6) {
-            $errors['password'] = 'Пароль должен содержать минимум 6 символов';
-        }
-
-        if (empty($data['id_role'])) {
-            $errors['id_role'] = 'Необходимо указать роль пользователя';
-        } elseif (!Role::where('id_role', $data['id_role'])->exists()) {
-            $errors['id_role'] = 'Указанной роли не существует';
-        }
-
-        return [
-            'success' => empty($errors),
-            'errors' => $errors
-        ];
-    }
-
     private function checkAdminAccess(): void
     {
         if (!Auth::check() || Auth::user()->id_role !== 1) {
             app()->route->redirect('/login');
-            return;
         }
     }
-
 }

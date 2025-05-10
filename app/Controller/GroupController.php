@@ -5,6 +5,7 @@ use Src\Request;
 use Src\View;
 use Model\StudentGroups;
 use Src\Auth\Auth;
+use Validation\GroupValidator;
 class GroupController
 {
     public function index(Request $request): string
@@ -21,9 +22,9 @@ class GroupController
     public function create(Request $request): string
     {
         if ($request->method === 'POST') {
-            $validated = $this->validate($request->all());
+            $validator = new GroupValidator();
 
-            if ($validated['success']) {
+            if ($validator['success']) {
                 $existingGroup = StudentGroups::where('name', $request->name)->first();
                 if ($existingGroup) {
                     $validated['success'] = false;
@@ -34,7 +35,7 @@ class GroupController
                 app()->route->redirect('/groups/create?success=Группа добавлена');
             }
 
-            return new View('site.add_group', ['errors' => $validated['errors']]);
+            return new View('site.add_group', ['errors' => $validator->getErrors()]);
         }
 
         return new View('site.add_group');

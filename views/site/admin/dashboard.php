@@ -189,9 +189,10 @@
 
             <div class="form-group">
                 <label>Логин</label>
-                <input type="text" name="login" required placeholder="Введите логин">
+                <input type="text" name="login" required placeholder="Введите логин"
+                       value="<?= isset($old['login']) ? htmlspecialchars($old['login']) : '' ?>">
                 <?php if (isset($errors['login'])): ?>
-                    <span class="error"><?= $errors['login'] ?></span>
+                    <span class="error"><?= is_array($errors['login']) ? implode(', ', $errors['login']) : htmlspecialchars($errors['login']) ?></span>
                 <?php endif; ?>
             </div>
 
@@ -199,18 +200,23 @@
                 <label>Пароль</label>
                 <input type="password" name="password" required placeholder="Введите пароль">
                 <?php if (isset($errors['password'])): ?>
-                    <span class="error"><?= $errors['password'] ?></span>
+                    <span class="error"><?= is_array($errors['password']) ? implode(', ', $errors['password']) : htmlspecialchars($errors['password']) ?></span>
                 <?php endif; ?>
             </div>
-
 
             <div class="form-group">
                 <label>Роль</label>
                 <select name="id_role" required>
                     <?php foreach ($roles as $role): ?>
-                        <option value="<?= $role->id_role ?>"><?= $role->name ?></option>
+                        <option value="<?= $role->id_role ?>"
+                            <?= (isset($old['id_role']) && $old['id_role'] == $role->id_role) ? 'selected' : '' ?>>
+                            <?= htmlspecialchars($role->name) ?>
+                        </option>
                     <?php endforeach; ?>
                 </select>
+                <?php if (isset($errors['id_role'])): ?>
+                    <span class="error"><?= is_array($errors['id_role']) ? implode(', ', $errors['id_role']) : htmlspecialchars($errors['id_role']) ?></span>
+                <?php endif; ?>
             </div>
 
             <button type="submit" class="btn btn-primary">Добавить пользователя</button>
@@ -218,7 +224,7 @@
     </div>
     <div class="card search-container">
         <form method="get" class="search-form">
-            <input type="hidden" name="getUsersWithSearch" value="1">
+            <input type="hidden" name="search" value="1">
             <div class="search-input-group">
                 <label for="search" class="form-group label">Поиск пользователей</label>
                 <input type="text"

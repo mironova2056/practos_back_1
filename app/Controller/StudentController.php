@@ -7,6 +7,7 @@ use Model\Students;
 use Model\StudentGroups;
 use Model\Genders;
 use Src\Auth\Auth;
+use Validation\StudentValidator;
 class StudentController
 {
     public function index(Request $request): View
@@ -48,13 +49,12 @@ class StudentController
 
     private function validate(array $data): array
     {
-        $errors = [];
-        if (empty($data['name'])) $errors[] = 'Имя обязательно';
-        if (empty($data['surname'])) $errors[] = 'Фамилия обязательна';
-        if (empty($data['date_birth'])) $errors[] = 'Дата рождения обязательна';
-        if (empty($data['id_gender'])) $errors[] = 'Пол обязателен';
-        if (empty($data['id_group'])) $errors[] = 'Группа обязательна';
-        if (empty($data['address'])) $errors[] = 'Адрес обязателен';
-        return ['success' => empty($errors), 'errors' => $errors];
+        $validator = new StudentValidator();
+        $isValid = $validator->validate($data);
+
+        return [
+            'success' => $isValid,
+            'errors' => $isValid ? [] : $validator->getErrors()
+        ];
     }
 }
