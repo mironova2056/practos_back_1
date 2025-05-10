@@ -13,7 +13,7 @@ class GroupController
             app()->route->redirect('/login');
         }
 
-        return new View('site.staff_page', [
+        return new View('site.add_group', [
             'groups' => StudentGroups::all()
         ]);
     }
@@ -24,14 +24,20 @@ class GroupController
             $validated = $this->validate($request->all());
 
             if ($validated['success']) {
+                $existingGroup = StudentGroups::where('name', $request->name)->first();
+                if ($existingGroup) {
+                    $validated['success'] = false;
+                    $validated['errors'][] = 'Группа с таким названием уже существует';
+                    return new View('site.add_group', ['errors' => $validated['errors']]);
+                }
                 StudentGroups::create($request->all());
-                app()->route->redirect('/staff/groups?success=Группа добавлена');
+                app()->route->redirect('/groups/create?success=Группа добавлена');
             }
 
-            return new View('site.staff_page', ['errors' => $validated['errors']]);
+            return new View('site.add_group', ['errors' => $validated['errors']]);
         }
 
-        return new View('site.staff_page');
+        return new View('site.add_group');
     }
 
     private function validate(array $data): array

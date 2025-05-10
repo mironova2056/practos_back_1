@@ -39,17 +39,17 @@ class GradeController
 
             if ($validated['success']) {
                 Grades::create($request->all());
-                app()->route->redirect('/staff/grades?success=Оценка добавлена');
+                app()->route->redirect('/grades/create?success=Оценка добавлена');
             }
 
-            return new View('site.staff_page', [
+            return new View('site.add_grade', [
                 'errors' => $validated['errors'],
                 'students' => Students::with('student_groups')->get(),
                 'disciplines' => Disciplines::all()
             ]);
         }
 
-        return new View('site.staff_page', [
+        return new View('site.add_grade', [
             'students' => Students::with('student_groups')->get(),
             'disciplines' => Disciplines::all()
         ]);

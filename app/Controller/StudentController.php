@@ -30,17 +30,17 @@ class StudentController
 
             if ($validated['success']) {
                 Students::create($request->all());
-                app()->route->redirect('/staff/students?success=Студент добавлен');
+                app()->route->redirect('/students/create?success=Студент добавлен');
             }
 
-            return new View('site.staff_page', [
+            return new View('site.add_student', [
                 'errors' => $validated['errors'],
                 'groups' => StudentGroups::all(),
                 'genders' => Genders::all()
             ]);
         }
 
-        return new View('site.staff_page', [
+        return new View('site.add_student', [
             'groups' => StudentGroups::all(),
             'genders' => Genders::all()
         ]);
@@ -54,6 +54,7 @@ class StudentController
         if (empty($data['date_birth'])) $errors[] = 'Дата рождения обязательна';
         if (empty($data['id_gender'])) $errors[] = 'Пол обязателен';
         if (empty($data['id_group'])) $errors[] = 'Группа обязательна';
+        if (empty($data['address'])) $errors[] = 'Адрес обязателен';
         return ['success' => empty($errors), 'errors' => $errors];
     }
 }

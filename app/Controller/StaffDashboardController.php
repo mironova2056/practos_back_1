@@ -21,12 +21,17 @@ class StaffDashboardController
         $groupId = $request->get('group_id');
         $course = $request->get('course');
         $semester = $request->get('semester');
-        $grade = $request->get('grade');
+        $disciplineId = $request->get('discipline_id');
 
         $groupDisciplines = GroupDisciplines::with(['disciplines', 'student_groups', 'control_type'])
             ->when($groupId, fn($q) => $q->where('id_group', $groupId))
             ->when($course, fn($q) => $q->where('course', $course))
             ->when($semester, fn($q) => $q->where('semester', $semester))
+            ->when($disciplineId, function($q) use ($disciplineId) {
+                $q->whereHas('disciplines', function($query) use ($disciplineId) {
+                    $query->where('id_discipline', $disciplineId);
+                });
+            })
             ->get();
 
         return new View('site.staff_page', [
@@ -36,6 +41,7 @@ class StaffDashboardController
             'selectedGroupId' => $groupId,
             'selectedCourse' => $course,
             'selectedSemester' => $semester,
+            'selectedDisciplineId' => $disciplineId,
             'students' => Students::with(['student_groups', 'gender'])->get(),
             'grades' => Grades::all()
         ]);

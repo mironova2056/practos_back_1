@@ -164,7 +164,8 @@
 
     <!-- Фильтры для данных -->
     <div class="section">
-        <form method="get" action="/staff">
+        <form method="get">
+            <input type="hidden" name="index" value="1">
             <div class="form-row">
                 <div class="form-group">
                     <label>Группа</label>
@@ -183,7 +184,8 @@
                     <select name="discipline_id" class="form-control">
                         <option value="">Все дисциплины</option>
                         <?php foreach ($disciplines as $discipline): ?>
-                            <option value="<?= $discipline->id_discipline ?>" <?= ($selectedDisciplineId ?? null) == $discipline->id_discipline ? 'selected' : '' ?>>
+                            <option value="<?= $discipline->id_discipline ?>"
+                                <?= ($selectedDisciplineId ?? '') == $discipline->id_discipline ? 'selected' : '' ?>>
                                 <?= htmlspecialchars($discipline->name) ?>
                             </option>
                         <?php endforeach; ?>
@@ -220,65 +222,6 @@
             </div>
         </form>
     </div>
-
-    <!-- Секция групп -->
-    <div class="section">
-        <div class="section-header">
-            <h2 class="section-title">Группы</h2>
-            <a href="/groups/create" class="btn btn-primary">Добавить группу</a>
-        </div>
-
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Название</th>
-                <th>Кол-во студентов</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php foreach ($groups as $group): ?>
-                <tr>
-                    <td><?= htmlspecialchars($group->name) ?></td>
-                    <td><?= $group->students()->count() ?></td>
-                </tr>
-            <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-
-    <!-- Секция студентов -->
-    <div class="section">
-        <div class="section-header">
-            <h2 class="section-title">Студенты</h2>
-            <a href="/students/create" class="btn btn-primary">Добавить студента</a>
-        </div>
-
-        <table class="table">
-            <thead>
-            <tr>
-                <th>ФИО</th>
-                <th>Группа</th>
-                <th>Пол</th>
-                <th>Дата рождения</th>
-            </tr>
-            </thead>
-            <tbody>
-            <?php if (!empty($students)): ?>
-                <?php foreach ($students as $student): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($student->surname . ' ' . $student->name . ' ' . $student->patronym) ?></td>
-                        <td><?= htmlspecialchars($student->group->name ?? 'Не указана') ?></td>
-                        <td><?= htmlspecialchars($student->gender->name ?? '') ?></td>
-                        <td><?= date('d.m.Y', strtotime($student->date_birth)) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else: ?>
-                <p>Нет данных о студентах</p>
-            <?php endif; ?>
-            </tbody>
-        </table>
-    </div>
-
     <!-- Секция дисциплин -->
     <div class="section">
         <div class="section-header">
@@ -319,12 +262,71 @@
         </table>
 
     </div>
+    <!-- Секция групп -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">Группы</h2>
+            <a href="/practos_back_1/groups/create" class="btn btn-primary">Добавить группу</a>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Название</th>
+                <th>Кол-во студентов</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($groups as $group): ?>
+                <tr>
+                    <td><?= htmlspecialchars($group->name) ?></td>
+                    <td><?= $group->students()->count() ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Секция студентов -->
+    <div class="section">
+        <div class="section-header">
+            <h2 class="section-title">Студенты</h2>
+            <a href="/practos_back_1/students/create" class="btn btn-primary">Добавить студента</a>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>Группа</th>
+                <th>Пол</th>
+                <th>Дата рождения</th>
+                <th>Адрес проживания</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php if (!empty($students)): ?>
+                <?php foreach ($students as $student): ?>
+                    <tr>
+                        <td><?= htmlspecialchars($student->surname . ' ' . $student->name . ' ' . $student->patronym) ?></td>
+                        <td><?= htmlspecialchars($student->student_groups->name ?? 'Не указана') ?></td>
+                        <td><?= htmlspecialchars($student->gender->name ?? '') ?></td>
+                        <td><?= date('d.m.Y', strtotime($student->date_birth)) ?></td>
+                        <td><?= htmlspecialchars($student->address) ?></td>
+                    </tr>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>Нет данных о студентах</p>
+            <?php endif; ?>
+            </tbody>
+        </table>
+    </div>
 
     <!-- Секция успеваемости -->
     <div class="section">
         <div class="section-header">
             <h2 class="section-title">Успеваемость</h2>
-            <a href="/grades/create" class="btn btn-primary">Добавить оценку</a>
+            <a href="/practos_back_1/grades/create" class="btn btn-primary">Добавить оценку</a>
         </div>
 
         <?php if (!empty($grades)): ?>
