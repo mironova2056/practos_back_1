@@ -52,23 +52,6 @@ class Admin
 
         return (string)$view;
     }
-
-    private function handleUserCreation(Request $request): void
-    {
-       $validator = new UserValidator();
-
-        if ($validator->validate($request->all())) {
-            if ($this->createUser($request->all())) {
-                Session::set('success', 'Пользователь успешно добавлен');
-                app()->route->redirect('/admin');
-            }
-        } else {
-            Session::set('form_data', $request->all());
-            Session::set('errors', $validator->getErrors());
-            app()->route->redirect('/admin');
-        }
-    }
-
     private function createUser(array $data): bool
     {
         try {

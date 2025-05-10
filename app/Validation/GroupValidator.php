@@ -1,7 +1,7 @@
 <?php
 
 namespace Validation;
-use Validation\Validator;
+use Src\Validation\Validator;
 class GroupValidator extends Validator
 {
     protected array $rules = [

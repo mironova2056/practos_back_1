@@ -27,17 +27,23 @@ class StudentController
     public function create(Request $request): string
     {
         if ($request->method === 'POST') {
-            $validated = $this->validate($request->all());
+            $requestData = $request->all();
+            if (empty($requestData['patronymic'])) {
+                $requestData['patronymic'] = null;
+            }
+
+            $validated = $this->validate($requestData);
 
             if ($validated['success']) {
-                Students::create($request->all());
+                Students::create($requestData);
                 app()->route->redirect('/students/create?success=Студент добавлен');
             }
 
             return new View('site.add_student', [
                 'errors' => $validated['errors'],
                 'groups' => StudentGroups::all(),
-                'genders' => Genders::all()
+                'genders' => Genders::all(),
+                'old' => $request->all()
             ]);
         }
 
