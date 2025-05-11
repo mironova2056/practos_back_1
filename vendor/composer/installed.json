@@ -806,6 +806,59 @@
             "install-path": "../illuminate/support"
         },
         {
+            "name": "mironova2056/custom-validation",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mironova2056/custom-validation.git",
+                "reference": "2960767be93883aaf7dffa708d541bf91c600637"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mironova2056/custom-validation/zipball/2960767be93883aaf7dffa708d541bf91c600637",
+                "reference": "2960767be93883aaf7dffa708d541bf91c600637",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "10.x-dev",
+                "illuminate/events": "10.x-dev",
+                "php": "^7.4 | ^8.0"
+            },
+            "time": "2025-05-11T14:51:58+00:00",
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "CustomValidation\\ValidationServiceProvider"
+                    ]
+                }
+            },
+            "installation-source": "dist",
+            "autoload": {
+                "psr-4": {
+                    "CustomValidation\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mary",
+                    "email": "maria.mironova562006@gmail.com"
+                }
+            ],
+            "description": "Module for working for validation ",
+            "support": {
+                "issues": "https://github.com/mironova2056/custom-validation/issues",
+                "source": "https://github.com/mironova2056/custom-validation/tree/main"
+            },
+            "install-path": "../mironova2056/custom-validation"
+        },
+        {
             "name": "nesbot/carbon",
             "version": "2.x-dev",
             "version_normalized": "2.9999999.9999999.9999999-dev",

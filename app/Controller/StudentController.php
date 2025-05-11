@@ -1,6 +1,7 @@
 <?php
 
 namespace Controller;
+
 use Src\Request;
 use Src\View;
 use Model\Students;
@@ -8,9 +9,10 @@ use Model\StudentGroups;
 use Model\Genders;
 use Src\Auth\Auth;
 use Validation\StudentValidator;
+
 class StudentController
 {
-    public function index(Request $request): View
+    public function index(Request $request): string
     {
         if (!Auth::check() || Auth::user()->id_role != 2) {
             app()->route->redirect('/login');
@@ -28,6 +30,8 @@ class StudentController
     {
         if ($request->method === 'POST') {
             $requestData = $request->all();
+
+            // Обработка необязательного поля
             if (empty($requestData['patronymic'])) {
                 $requestData['patronymic'] = null;
             }
@@ -37,6 +41,7 @@ class StudentController
             if ($validated['success']) {
                 Students::create($requestData);
                 app()->route->redirect('/students/create?success=Студент добавлен');
+                exit;
             }
 
             return new View('site.add_student', [

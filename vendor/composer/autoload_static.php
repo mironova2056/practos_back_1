@@ -56,6 +56,7 @@ class ComposerStaticInit8271f1c03e87afbc1a5aaa9ed6f2ffdc
         ),
         'C' => 
         array (
+            'CustomValidation\\' => 17,
             'Carbon\\Doctrine\\' => 16,
             'Carbon\\' => 7,
         ),
@@ -140,6 +141,10 @@ class ComposerStaticInit8271f1c03e87afbc1a5aaa9ed6f2ffdc
         'Doctrine\\Inflector\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector',
+        ),
+        'CustomValidation\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mironova2056/custom-validation/src',
         ),
         'Carbon\\Doctrine\\' => 
         array (
