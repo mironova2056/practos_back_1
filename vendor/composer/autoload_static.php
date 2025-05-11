@@ -14,6 +14,7 @@ class ComposerStaticInit8271f1c03e87afbc1a5aaa9ed6f2ffdc
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
         'ef65a1626449d89d0811cf9befce46f0' => __DIR__ . '/..' . '/illuminate/events/functions.php',
+        '309cfa0217efa2b1cffcc8ed1e5461ab' => __DIR__ . '/..' . '/mironova2056/collect/src/helpers.php',
         '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
     );
 
@@ -56,6 +57,7 @@ class ComposerStaticInit8271f1c03e87afbc1a5aaa9ed6f2ffdc
         ),
         'C' => 
         array (
+            'Collect\\' => 8,
             'Carbon\\Doctrine\\' => 16,
             'Carbon\\' => 7,
         ),
@@ -140,6 +142,10 @@ class ComposerStaticInit8271f1c03e87afbc1a5aaa9ed6f2ffdc
         'Doctrine\\Inflector\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/inflector/lib/Doctrine/Inflector',
+        ),
+        'Collect\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mironova2056/collect/src',
         ),
         'Carbon\\Doctrine\\' => 
         array (

@@ -806,6 +806,53 @@
             "install-path": "../illuminate/support"
         },
         {
+            "name": "mironova2056/collect",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mironova2056/practos_collect.git",
+                "reference": "9ee0399c70b60beab4700ffec1bceb24830e1194"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mironova2056/practos_collect/zipball/9ee0399c70b60beab4700ffec1bceb24830e1194",
+                "reference": "9ee0399c70b60beab4700ffec1bceb24830e1194",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.4 | ^8.0"
+            },
+            "time": "2025-05-11T14:06:21+00:00",
+            "default-branch": true,
+            "type": "library",
+            "installation-source": "dist",
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Collect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mary",
+                    "email": "maria.mironova562006@gmial.com"
+                }
+            ],
+            "description": "Module for working with arrays ",
+            "support": {
+                "issues": "https://github.com/mironova2056/practos_collect/issues",
+                "source": "https://github.com/mironova2056/practos_collect/tree/main"
+            },
+            "install-path": "../mironova2056/collect"
+        },
+        {
             "name": "nesbot/carbon",
             "version": "2.x-dev",
             "version_normalized": "2.9999999.9999999.9999999-dev",
