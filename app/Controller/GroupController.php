@@ -22,17 +22,16 @@ class GroupController
     public function create(Request $request): string
     {
         if ($request->method === 'POST') {
-            $validator = new GroupValidator();
+            $validator = new GroupValidator($request->all());
 
-            if ($validator['success']) {
-                $existingGroup = StudentGroups::where('name', $request->name)->first();
-                if ($existingGroup) {
-                    $validated['success'] = false;
-                    $validated['errors'][] = 'Группа с таким названием уже существует';
-                    return new View('site.add_group', ['errors' => $validated['errors']]);
+            if ($validator->validate()) {
+                if (StudentGroups::create($request->all())) {
+                    app()->route->redirect('/groups/create?success=Группа добавлена');
+                } else {
+                    return new View('site.add_group', [
+                        'errors' => ['Ошибка при создании группы']
+                    ]);
                 }
-                StudentGroups::create($request->all());
-                app()->route->redirect('/groups/create?success=Группа добавлена');
             }
 
             return new View('site.add_group', ['errors' => $validator->getErrors()]);

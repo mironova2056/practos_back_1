@@ -167,6 +167,7 @@
     .reset-btn:hover {
         background: #7f8c8d;
     }
+
 </style>
 
 <div class="admin-container">
@@ -231,7 +232,7 @@
                        id="search"
                        name="search"
                        class="search-input"
-                       placeholder="Введите логин пользователя..."
+                       placeholder="Введите логин пользователя или его роль..."
                        value="<?= htmlspecialchars($searchQuery ?? '') ?>">
             </div>
             <button type="submit" class="search-btn">Найти</button>

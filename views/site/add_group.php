@@ -124,10 +124,16 @@
 
     <div class="section">
         <!-- Вывод сообщений об ошибках -->
-        <?php if (!empty($errors)): ?>
+        <?php if (!empty($errors) && is_array($errors)): ?>
             <div class="alert alert-danger">
-                <?php foreach ($errors as $error): ?>
-                    <p><?= htmlspecialchars($error) ?></p>
+                <?php foreach ($errors as $fieldErrors): ?>
+                    <?php if (is_array($fieldErrors)): ?>
+                        <?php foreach ($fieldErrors as $error): ?>
+                            <p><?= htmlspecialchars($error) ?></p>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <p><?= htmlspecialchars($fieldErrors) ?></p>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         <?php endif; ?>
@@ -147,10 +153,17 @@
                 <input type="text"
                        id="name"
                        name="name"
-                       class="form-control"
+                       class="form-control <?= !empty($errors['name']) ? 'is-invalid' : '' ?>"
                        placeholder="Например: 211"
                        required
                        value="<?= htmlspecialchars($request->name ?? '') ?>">
+                <?php if (!empty($errors['name'])): ?>
+                    <div class="invalid-feedback">
+                        <?php foreach ($errors['name'] as $error): ?>
+                            <p><?= htmlspecialchars($error) ?></p>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
             </div>
 
             <div class="form-group">

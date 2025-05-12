@@ -7,14 +7,19 @@ abstract class Validator
     protected array $errors = [];
     protected array $rules = [];
     protected array $messages = [];
+    protected array $data;
+    public function __construct(array $data)
+    {
+        $this->data = $data;
+    }
 
-    public function validate(array $data): bool
+    public function validate(): bool
     {
         $this->errors = [];
 
         foreach ($this->rules as $field => $fieldRules) {
             foreach ($fieldRules as $rule) {
-                $this->applyRule($field, $rule, $data[$field] ?? null);
+                $this->applyRule($field, $rule, $this->data[$field] ?? null);
             }
         }
 

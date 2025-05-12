@@ -12,6 +12,11 @@ use Controller\UserSearch;
 use Validation\UserValidator;
 class Admin
 {
+    protected $validator;
+    public function __construct(UserValidator $validator)
+    {
+        $this->validator = $validator;
+    }
     public function adminDashboard(Request $request): string
     {
         $this->checkAdminAccess();
@@ -22,7 +27,7 @@ class Admin
         $searchQuery = null;
 
         if ($request->method === 'POST' && !$request->has('search')) {
-            $validator = new UserValidator();
+            $validator = new UserValidator($request->all());
 
             if ($validator->validate($request->all())) {
                 if ($this->createUser($request->all())) {
