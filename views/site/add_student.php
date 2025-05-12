@@ -144,7 +144,7 @@
     </div>
 
     <div class="section">
-        <!-- Вывод сообщений об ошибках -->
+
         <!-- Вывод сообщений об ошибках -->
         <?php if (!empty($errors)): ?>
             <div class="alert alert-danger">
